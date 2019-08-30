@@ -52,12 +52,14 @@ namespace WpfAppAuthentification
         {
             new InternalUserData("Mark", "mark@company.com", "MB5PYIsbI2YzCUe34Q5ZU2VferIoI4Ttd+ydolWV0OE=", new string[] { "Administrators" }),
             new InternalUserData("John", "john@company.com", "hMaLizwzOQ5LeOnMuj+C6W75Zl5CXXYbwDSHWW9ZOXc=", new string[] { })
-        };
+        };       // dw19Q8xM4ZOpOuTTdrBYh7VJImakLW6xvThLHWVRfFM=
 
         public User AuthenticateUser(string username, string clearTextPassword)
         {
+            var res = CalculateHash(clearTextPassword, username);
+
             InternalUserData userData = _users.FirstOrDefault(u => u.Username.Equals(username)
-                && u.HashedPassword.Equals(CalculateHash(clearTextPassword, u.Username)));
+                && u.HashedPassword.Equals("hMaLizwzOQ5LeOnMuj+C6W75Zl5CXXYbwDSHWW9ZOXc = "));
             if (userData == null)
                 throw new UnauthorizedAccessException("Access denied. Please provide some valid credentials.");
 
